@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Visualizar Recortes de Produção{% endblock %}
+
+{% block content %}
+    <h2>Recortes de Produção Cadastrados</h2>
+    {% if recortes %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cód. Peça</th>
+                    <th>Qtde</th>
+                    <th>Data</th>
+                    <th>Turno</th>
+                    <th>Obs</th>
+                    <th>Largura</th>
+                    <th>Comprimento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recorte in recortes %}
+                <tr>
+                    <td>{{ recorte.id }}</td>
+                    <td>{{ recorte.codigo_peca }}</td>
+                    <td>{{ recorte.quantidade }}</td>
+                     <td>{{ recorte.medidaa }}</td>
+                     <td>{{ recorte.medidab }}</td>
+                     <td>{{ recorte.data_producao }}</td>
+                    <td>{{ recorte.turno }}</td>
+                    <td>{{ recorte.observacoes if recorte.observacoes else '-' }}</td>
+                    <td>
+                        <form action="{{ url_for('delete_recorte', recorte_id=recorte.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este recorte?');" class="delete-btn">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nenhum recorte de produção cadastrado ainda.</p>
+    {% endif %}
+{% endblock %}

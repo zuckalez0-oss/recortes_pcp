@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastro de Recortes{% endblock %}
+
+{% block content %}
+    <h2>Cadastrar Novo Recorte</h2>
+    <form action="{{ url_for('add_recorte') }}" method="POST">
+        <label for="codigo_peca">Código da Peça:</label>
+        <input type="text" id="codigo_peca" name="codigo_peca" required>
+        <label for ="medidaa">Medida A</label>
+        <input type="number" id = "medidaa" name="medidaa" min="1" required>
+        <label for ="medidab">Medida B</label>
+          <input type="number" id = "medidab" name="medidab" min="1" required>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" min="1" required>
+
+        <label for="data_producao">Data da Produção:</label>
+        <input type="date" id="data_producao" name="data_producao" value="{{ hoje }}" required>
+
+        <label for="turno">Turno:</label>
+        <select id="turno" name="turno" required>
+            <option value="">Selecione</option>
+            <option value="1">1º Turno</option>
+            <option value="2">2º Turno</option>
+            <option value="3">3º Turno</option>
+        </select>
+
+        <label for="observacoes">Observações (opcional):</label>
+        <textarea id="observacoes" name="observacoes" rows="4"></textarea>
+
+        <button type="submit">Adicionar Recorte</button>
+    </form>
+{% endblock %}
